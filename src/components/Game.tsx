@@ -19,6 +19,11 @@ export default function Game() {
     setCurrentMove(move);
   }
 
+  function handleReset() {
+    setHistory([Array(9).fill(null)]);
+    setCurrentMove(0);
+  }
+
   return (
     <div className='game'>
       <div className='game-board'>
@@ -26,6 +31,7 @@ export default function Game() {
       </div>
       <div className='game-info'>
         {currentMove !== 0 && <button onClick={handleUndo}>Undo</button>}
+        {currentMove !== 0 && <button onClick={handleReset}>Reset</button>}
       </div>
     </div>
   );
