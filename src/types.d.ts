@@ -1,0 +1,1 @@
+type Squares = (string | null)[];
