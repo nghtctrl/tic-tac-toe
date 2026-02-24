@@ -13,18 +13,11 @@ export default function Game() {
     setCurrentMove(nextHistory.length - 1);
   }
 
-  function jumpTo(nextMove: number) {
-    setCurrentMove(nextMove);
+  function handleUndo() {
+    const move = currentMove - 1;
+    if (move < 0) return;
+    setCurrentMove(move);
   }
-
-  const moves = history.map((_squares, move) => {
-    const description = move > 0 ? 'Go to move #' + move : 'Go to game start';
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
-  });
 
   return (
     <div className='game'>
@@ -32,7 +25,7 @@ export default function Game() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className='game-info'>
-        <ol>{moves}</ol>
+        {currentMove !== 0 && <button onClick={handleUndo}>Undo</button>}
       </div>
     </div>
   );
